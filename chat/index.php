@@ -8,8 +8,12 @@ $result = returnUsers("users",$conn);
 ?>
 
 
-
+<h1>Liste des utilisateurs</h1>
 <?php foreach($result as $users): ?>
-    <?= var_dump($users) ?>
-        <li><?= $users->userName ?></li>
+        <table>
+            <tr>
+                <td><?= $users->usersName?></td>
+                <td><?= $users->usersFirstName?></td>
+            </tr>
+        </table>
 <?php endforeach; ?>
