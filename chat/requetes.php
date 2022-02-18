@@ -3,11 +3,13 @@
 
 function returnUsers(string $table, $conn):array{
     $query = $conn->query("select * from {$table}");
-    if(!$query){
-        var_dump($conn->errorInfo());
-        die('Error SQL');
-    }
-    $result = $query->fetchAll(PDO::FETCH_CLASS);
+    $result = $query->fetchAll();
 
     return $result;
+}
+
+function ajoutUsers($conn,string $usersName, string $usersFirstName){
+    $sql = "INSERT INTO users (usersName, usersFirstName) VALUES('$usersName', '$usersFirstName')";
+    $result = $conn->prepare($sql);
+    $result->execute();
 }
