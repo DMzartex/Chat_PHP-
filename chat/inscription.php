@@ -7,7 +7,16 @@ require_once 'requetes.php';
 $erreur = "";
 
 if(!empty($_POST['usersName']) && !empty($_POST['usersFirstName'])){
-    ajoutUsers($conn,$_POST['usersName'], $_POST['usersFirstName']);
+    
+    $stmt = $conn->prepare("SELECT * FROM users WHERE usersFirstName='$_POST[usersFirstName]'");// select du pseudo
+    $stmt->execute(); // execution de la requête
+    $user = $stmt->fetch();
+    if ($user) { // verification si l'utilisateur existe ou pas 
+        echo "l'utilisateur existe déja !";
+    } else {
+        ajoutUsers($_POST['usersName'], $_POST['usersFirstName']);
+    } 
+
 }else{
     $erreur = "Vous devez remplir tout les champs pour pouvoir vous inscrire !";
 }

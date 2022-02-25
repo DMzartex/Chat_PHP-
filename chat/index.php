@@ -2,7 +2,7 @@
 require_once 'db.php';
 require_once 'requetes.php';
 
-$result = returnUsers("users",$conn);
+$result = returnUsers("users");
 
 
 ?>

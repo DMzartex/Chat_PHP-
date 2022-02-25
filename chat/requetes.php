@@ -1,15 +1,20 @@
 <?php 
 
 
-function returnUsers(string $table, $conn):array{
+function returnUsers(string $table):array{
+    global $conn;
     $query = $conn->query("select * from {$table}");
     $result = $query->fetchAll();
 
     return $result;
 }
 
-function ajoutUsers($conn,string $usersName, string $usersFirstName){
-    $sql = "INSERT INTO users (usersName, usersFirstName) VALUES('$usersName', '$usersFirstName')";
-    $result = $conn->prepare($sql);
-    $result->execute();
+function ajoutUsers(string $usersName, string $usersFirstName){
+    global $conn;
+    $ajout = $conn->prepare("INSERT INTO users (usersName, usersFirstName) VALUES(:usersName, :usersFirstName)");
+    $ajout->execute([
+        'usersName'=> $usersName,
+        'usersFirstName' => $usersFirstName
+    ]);
+    
 }
