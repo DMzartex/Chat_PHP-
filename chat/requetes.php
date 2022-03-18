@@ -1,7 +1,8 @@
 <?php 
 
 
-function returnUsers(string $table):array{
+function returnUsers(string $table):array
+{
     global $conn;
     $query = $conn->query("select * from {$table}");
     $result = $query->fetchAll();
